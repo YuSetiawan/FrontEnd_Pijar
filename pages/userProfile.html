@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+
+    <title>Shopping Cart</title>
+    <style>
+      body {
+        overflow-x: hidden;
+        background-color: #f5f5f5;
+        width: 100vw;
+        height: 100vh;
+      }
+      .input {
+        width: 600px;
+        border-radius: 25px !important;
+      }
+      #home-nav {
+        background: #ffffff;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+      }
+      #searchbox {
+        border-radius: 25px;
+        width: 500px;
+        padding-right: 40px;
+      }
+      .searchLogo {
+        margin-left: -40px;
+        margin-right: 20px;
+      }
+      .orderForm {
+        color: #ffffff;
+      }
+      #nav-content {
+        height: 90vh;
+      }
+      @media only screen and (max-width: 800px) {
+        #searchbox {
+          width: 400px;
+        }
+        .category {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        #nav-content {
+          height: 58vh;
+          width: 50vh;
+        }
+      }
+      @media only screen and (max-width: 500px) {
+        #searchbox {
+          border-radius: 25px;
+          width: 250px;
+        }
+        .searchLogo {
+          margin-left: -30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav id="home-nav" class="navbar nav justify-content-center fixed-top navbar-expand-lg navbar-light bg-light mb-5">
+        <div class="container">
+          <a class="logo-blanja mr-5" href="../index.html">
+            <img src="/assets/img/logo.png" height="50" class="d-inline-block align-top" alt="" />
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item ml-2 form-inline row justify-content-center">
+                <input id="searchbox" class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" />
+                <img class="searchLogo" src="/assets/img/Search Glyph.png" alt="" />
+                <img id="homeFilter" class="mr-4" src="/assets/img/filter.png" alt="filter" />
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 row justify-content-center">
+              <a href="/pages/checkOut.html">
+                <img class="mr-4" src="/assets/img/cart.png" alt="cart" />
+              </a>
+              <img class="mr-4" src="/assets/img/bell.png" alt="cart" />
+              <img class="mr-4" src="/assets/img/mail.png" alt="cart" />
+              <a href="/pages/checkOut.html">
+                <img class="mr-4" src="/assets/img/Profile.png" alt="cart" />
+              </a>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="mt-5">
+        <div class="row">
+          <!-- Nav-content -->
+          <div class="col-md-3 col-12 sm-0 pt-5 bg-white">
+            <div id="nav-content" class="container ml-4">
+              <div class="row d-flex align-items-center mb-5 pl-4">
+                <img class="pb-3" src="/assets/img/Medium-profile.png" alt="" />
+                <div class="ml-3">
+                  <h5>Johanes Mikael</h5>
+                  <div class="form-inline">
+                    <img class="pb-3" src="/assets/img/pen.png" alt="" />
+                    <p class="ml-2">Change profile</p>
+                  </div>
+                </div>
+              </div>
+              <div class="list-group align-items-center" id="list-tab" role="tablist">
+                <a class="list-group-item btn btn-light list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" style="border: none">
+                  <div class="form-inline">
+                    <button class="rounded-circle btn btn-primary" style="border: none" alt="">
+                      <img class="pb-1" src="/assets/img/user.png" alt="" />
+                    </button>
+                    <p class="pt-3 ml-3">My account</p>
+                  </div>
+                </a>
+                <a class="list-group-item btn btn-light list-group-item-action" id="list-Shipping-list" data-toggle="list" href="#list-Shipping" role="tab" aria-controls="Shipping" style="border: none">
+                  <div class="form-inline">
+                    <button class="rounded-circle btn btn-warning" style="border: none" alt="">
+                      <img class="pb-1" src="/assets/img/location.png" alt="" />
+                    </button>
+                    <p class="pt-3 ml-3">Shipping address</p>
+                  </div>
+                </a>
+                <a class="list-group-item btn btn-light list-group-item-action" id="list-order-list" data-toggle="list" href="#list-order" role="tab" aria-controls="order" style="border: none">
+                  <div class="form-inline">
+                    <button class="rounded-circle btn btn-danger" style="border: none" alt="">
+                      <img class="pb-1" src="/assets/img/order.png" alt="" />
+                    </button>
+                    <p class="pt-3 ml-3">My order</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Content -->
+          <!-- Profile Content -->
+          <div class="col-md-9 col-12 pt-5">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="container ml-3">
+                  <div class="card pl-3">
+                    <div class="card-body">
+                      <div class="pt-3 border-bottom">
+                        <h3>My profile</h3>
+                        <p class="text-secondary">Manage your profile information</p>
+                      </div>
+                      <!-- Left Profile -->
+                      <div class="row pt-5">
+                        <div class="col-md-8 col 12">
+                          <div class="form-group row">
+                            <label for="inputName" class="col-sm-3 col-form-label text-secondary">Name</label>
+                            <div class="col-sm-9">
+                              <input type="email" class="form-control" id="inputName" placeholder="Johanes Mikael" />
+                            </div>
+                          </div>
+                          <div class="form-group row mt-4">
+                            <label for="inputEmail" class="col-sm-3 col-form-label text-secondary">Email</label>
+                            <div class="col-sm-9">
+                              <input type="email" class="form-control" id="inputEmail" placeholder="johanes@gmail.com" />
+                            </div>
+                          </div>
+                          <div class="form-group row mt-4">
+                            <label for="inputPhone" class="col-sm-3 col-form-label text-secondary">Phone number</label>
+                            <div class="col-sm-9">
+                              <input type="email" class="form-control" id="inputPhone" placeholder="08901289012" />
+                            </div>
+                          </div>
+                          <fieldset class="form-group row mt-4">
+                            <legend class="col-form-label col-sm-3 float-sm-left pt-0 text-secondary">Gender</legend>
+                            <div class="col-sm-9">
+                              <div class="row pl-3">
+                                <div class="form-check col-sm-3">
+                                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked />
+                                  <label class="form-check-label text-secondary" for="gridRadios1"> Male </label>
+                                </div>
+                                <div class="form-check col-sm-3">
+                                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" />
+                                  <label class="form-check-label text-secondary" for="gridRadios2"> Female </label>
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                          <div class="form-group row mt-4">
+                            <label class="col-sm-3 col-form-label text-secondary">Date of birth</label>
+                            <div class="col-sm-9 pl-4 row">
+                              <select class="custom-select col-3 ml-1 mr-2">
+                                <option selected>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                                <option>15</option>
+                                <option>16</option>
+                                <option>17</option>
+                                <option>18</option>
+                                <option>19</option>
+                                <option>20</option>
+                                <option>21</option>
+                                <option>22</option>
+                                <option>23</option>
+                                <option>24</option>
+                                <option>25</option>
+                                <option>26</option>
+                                <option>27</option>
+                                <option>28</option>
+                                <option>29</option>
+                                <option>30</option>
+                              </select>
+                              <select class="custom-select col-3 mr-2">
+                                <option selected>January</option>
+                                <option value="1">February</option>
+                                <option value="2">March</option>
+                                <option value="3">April</option>
+                                <option value="4">May</option>
+                                <option value="5">June</option>
+                                <option value="6">July</option>
+                                <option value="7">August</option>
+                                <option value="8">September</option>
+                                <option value="9">October</option>
+                                <option value="10">November</option>
+                                <option value="11">December</option>
+                              </select>
+                              <select class="custom-select col-3 mr-2">
+                                <option selected>1990</option>
+                                <option>1991</option>
+                                <option>1992</option>
+                                <option>1993</option>
+                                <option>1994</option>
+                                <option>1995</option>
+                                <option>1996</option>
+                                <option>1997</option>
+                                <option>1998</option>
+                                <option>1999</option>
+                                <option>2000</option>
+                                <option>2001</option>
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Right Profile -->
+                        <div class="col-md-3 border-left">
+                          <img class="pl-5 mb-3" src="/assets/img/Big-profile.png" alt="" />
+                          <button type="button" class="btn btn-outline-secondary rounded-pill ml-5" style="width: fit-content">Select image</button>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-2 mt-3">
+                          <button type="button" class="btn btn-danger rounded-pill w-100" style="width: fit-content">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Address Content -->
+              <div class="tab-pane fade" id="list-Shipping" role="tabpanel" aria-labelledby="list-Shipping-list">
+                <div class="card ml-3">
+                  <div class="card-body">
+                    <div class="pt-3 border-bottom">
+                      <h3>Choose another address</h3>
+                      <p class="text-secondary">Manage your shipping address</p>
+                    </div>
+                    <div class="pt-3">
+                      <div class="container pl-5 pr-5 mb-5">
+                        <!-- Button trigger modal -->
+
+                        <div class="col-md-12 mb-4" data-toggle="modal" data-target="#exampleModal" style="border: 2px dashed lightgray; border-radius: 4px">
+                          <p class="col-12 text-secondary pt-3" style="display: flex; justify-content: center">Add new address</p>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="col-12 pt-3" style="display: flex; justify-content: center">Add new address</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: -100px">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                      <label for="validationDefault01">Save address as (ex : home address, office address)</label>
+                                      <input type="text" class="form-control" id="validationDefault01" placeholder="Your address" required />
+                                    </div>
+                                  </div>
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationDefault01">Recipient’s name</label>
+                                      <input type="text" class="form-control" id="validationDefault01" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationDefault02">Recipient's telephone number</label>
+                                      <input type="text" class="form-control" id="validationDefault02" required />
+                                    </div>
+                                  </div>
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationDefault01">Postal code</label>
+                                      <input type="text" class="form-control" id="validationDefault01" required />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationDefault02">Postal code</label>
+                                      <input type="text" class="form-control" id="validationDefault02" required />
+                                    </div>
+                                  </div>
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                      <label for="validationDefault03">City or Subdistrict</label>
+                                      <input type="text" class="form-control" id="validationDefault03" required />
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
+                                      <label class="form-check-label" for="invalidCheck2"> Agree to terms and conditionsMake it the primary address </label>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer d-flex justify-content-end pb-4">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill mr-2" style="width: 130px">Cancel</button>
+                                <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal" style="width: 130px">Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Modal end -->
+                        <div class="card-body col-md-12 border border-danger rounded mt-4 pl-sm-5">
+                          <h5 class="card-title">Andreas Jane</h5>
+                          <p class="card-text">Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181.</p>
+                          <h5 class="text-danger">Change address</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Order Content -->
+              <div class="tab-pane fade ml-3" id="list-order" role="tabpanel" aria-labelledby="list-order-list">
+                <div class="card">
+                  <div class="container">
+                    <ul class="nav nav-pills d-flex justify-content-around pt-3 mb-3" id="pills-tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link btn btn-outline-danger active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All items</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link btn btn-outline-danger" id="pills-notPaid-tab" data-toggle="pill" data-target="#pills-notPaid" type="button" role="tab" aria-controls="pills-notPaid" aria-selected="false">
+                          Not yet paid
+                        </button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link btn btn-outline-danger" id="pills-Packed-tab" data-toggle="pill" data-target="#pills-Packed" type="button" role="tab" aria-controls="pills-Packed" aria-selected="false">Packed</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link btn btn-outline-danger" id="pills-Sent-tab" data-toggle="pill" data-target="#pills-Sent" type="button" role="tab" aria-controls="pills-Sent" aria-selected="false">Sent</button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link btn btn-outline-danger" id="pills-Completed-tab" data-toggle="pill" data-target="#pills-Completed" type="button" role="tab" aria-controls="pills-Completed" aria-selected="false">
+                          Completed
+                        </button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link btn btn-outline-danger" id="pills-Order-tab" data-toggle="pill" data-target="#pills-Order" type="button" role="tab" aria-controls="pills-Order" aria-selected="false">Order cancel</button>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="tab-content text-white" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="container pl-4 pr-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse in quidem, facere maiores impedit dolorem quia voluptatem, dolor blanditiis reiciendis perspiciatis numquam velit rem vero debitis accusantium eius quis.
+                        Temporibus beatae in nisi. Suscipit dolorum maiores dolor ullam assumenda distinctio consequuntur fugiat quo rerum, sunt, sequi iste dolore quibusdam expedita exercitationem provident similique quaerat animi
+                        doloribus laboriosam ad adipisci in earum? Beatae facere dolorem debitis, quia fuga quod in amet, minus repellendus rem sunt atque. Voluptate deleniti id doloribus temporibus corrupti, consequatur illum fugit optio
+                        ut aut. Totam quod minus deserunt aspernatur at natus. Odit laboriosam commodi voluptate esse exercitationem sint qui molestiae cum, possimus pariatur sapiente asperiores, facilis incidunt? Cumque totam est, tempora
+                        et at animi. Saepe, facilis. Ut commodi vero temporibus provident ipsa atque suscipit dolores dignissimos corporis illo? Explicabo veniam at voluptatibus rem quis a ullam voluptates mollitia! Ut, maxime ipsum
+                        suscipit cum soluta consectetur culpa ipsa optio sed vitae totam itaque sint quaerat officiis incidunt consequatur amet earum assumenda eveniet rem excepturi recusandae dolor. Nemo in illo dignissimos voluptatem
+                        adipisci est assumenda aperiam tempore modi dolorem maxime veniam alias accusamus, laboriosam magnam sint expedita repellendus accusantium cumque placeat, odio ab. Quod earum illum itaque illo esse alias tenetur
+                        explicabo rem hic quasi nulla ipsam atque quo impedit nemo, ducimus saepe eligendi, eum error fugiat molestias inventore quas? Totam doloremque fuga, non illum sequi dolorum ratione aliquam repellendus quos quod id?
+                        Quod voluptatum facilis quas qui odio dolorem ex iste repudiandae dolores labore. Quam aspernatur modi iusto rerum sint beatae ullam! Modi quasi perferendis perspiciatis architecto fugiat, cum sequi iusto ex.
+                        Praesentium, odit. Quis nostrum nemo itaque architecto voluptatem tempora commodi dolore eius! Itaque adipisci, asperiores laboriosam quo a incidunt totam, consequuntur enim, ut dolorum necessitatibus blanditiis
+                        esse! Accusamus, omnis sunt qui aspernatur nostrum asperiores amet libero.
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-notPaid" role="tabpanel" aria-labelledby="pills-notPaid-tab">
+                      <div class="container pl-4 pr-4">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia illo qui quaerat excepturi dignissimos velit magni, est blanditiis delectus quisquam, cupiditate fugiat assumenda esse eveniet expedita vel facilis
+                        adipisci dolore consectetur nulla. Ex consequatur quis nisi sunt dignissimos, iusto odio earum corporis in ea facere labore, sit totam aut consequuntur incidunt autem saepe! Architecto hic dolorum aliquid inventore
+                        omnis magni eaque molestiae. Quasi accusantium est repudiandae, consequuntur debitis fugit molestias consectetur ab aspernatur enim impedit tempore amet. Nostrum incidunt, inventore eum distinctio commodi optio
+                        alias. Consequuntur labore rem ipsa perspiciatis sequi odio sint suscipit sunt vitae cupiditate a, iste quae eius, recusandae accusamus blanditiis dolor assumenda quas id itaque. Ipsum animi ex porro explicabo
+                        reprehenderit non sapiente earum, quidem deleniti esse modi distinctio nemo commodi excepturi, dolorum quibusdam quas! Sed fugit voluptatibus laudantium nulla minus iure reprehenderit temporibus, dicta cupiditate
+                        eveniet velit nihil obcaecati tempora corporis vitae et, culpa iusto necessitatibus beatae, cumque consectetur facilis repudiandae? Ea inventore illum architecto, consequatur neque eos voluptatum nam, doloribus
+                        asperiores molestiae maiores. Nesciunt iste quod eum magni temporibus esse debitis accusamus doloribus totam hic quam corporis assumenda delectus dicta architecto obcaecati nulla, corrupti quaerat minima? Asperiores
+                        libero quae culpa esse. Dolore, maxime adipisci. Velit nulla deserunt minus et praesentium iusto recusandae nam soluta eligendi id deleniti, expedita facilis eveniet reprehenderit asperiores veritatis, quae quas?
+                        Adipisci ipsa ducimus culpa excepturi reiciendis recusandae doloribus nisi earum veritatis vero dignissimos amet aliquam sed, nemo enim eveniet nulla? Ducimus amet voluptate excepturi assumenda ut facilis omnis et
+                        neque illo, alias voluptatum, modi sequi doloribus a optio quae dolorum officiis praesentium commodi officia repellat porro velit pariatur labore. Nihil hic illum architecto minima? Recusandae nemo ex officiis
+                        magnam, repellendus sint neque suscipit labore iusto obcaecati reprehenderit quia et quae ducimus doloribus. Beatae eveniet pariatur veniam ipsa recusandae molestiae.
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-Packed" role="tabpanel" aria-labelledby="pills-Packed-tab">
+                      <div class="container pl-4 pr-4">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur sit amet esse voluptate tempore molestias doloribus ea aspernatur dolorum deserunt vel quis placeat est eius officia laboriosam omnis iure nisi
+                        quas, culpa perferendis. Iusto vitae quo voluptates dicta ipsum pariatur repudiandae enim, obcaecati, dolores a maxime? Sit totam pariatur obcaecati velit eaque voluptatibus corporis fugiat unde fugit repudiandae
+                        deserunt distinctio quas voluptatem deleniti consequatur cupiditate minima ipsam earum vel incidunt dignissimos, ea eligendi. Porro distinctio vero, facere praesentium totam error debitis voluptatem aliquid,
+                        laudantium quibusdam sapiente iste reiciendis eaque recusandae mollitia velit molestias. Necessitatibus atque eveniet sit est, autem possimus iste. Cum debitis corporis eaque, reprehenderit deleniti exercitationem
+                        autem dolore molestias, at, doloribus nisi suscipit quae! Omnis iusto similique, hic ut iure asperiores itaque vel nemo qui, voluptatum tenetur dolor voluptate, repellendus expedita recusandae. Facere vitae
+                        consectetur beatae ipsam, laboriosam omnis, illum quo quasi est recusandae eos, optio nisi mollitia magni. Praesentium ab voluptate fugiat adipisci voluptas cum impedit. Quidem eaque earum tenetur enim, excepturi
+                        nobis mollitia iste at voluptas dolorum laboriosam, maiores totam quasi minus officia? Veniam, autem quod? Temporibus quam asperiores quos ullam, modi corporis maiores tempora rem vitae dolorem, distinctio numquam
+                        odit sapiente quaerat perferendis iusto! Deleniti porro incidunt qui sed et. Error perferendis, incidunt voluptate repellendus temporibus ullam odio quos. Quae optio consequuntur nemo! Harum ipsum, rem sapiente
+                        exercitationem corrupti accusantium ex, nulla quod reiciendis necessitatibus ut officiis? Iste dolorem illo laboriosam vero quo, eum voluptatum quam aliquid, vitae laudantium facilis quas. Numquam vitae qui excepturi
+                        dicta ea nesciunt dolorem. Labore tempore et commodi in? Voluptatem eaque, modi repellat culpa unde porro quisquam ea animi libero accusamus amet aliquid repudiandae in id sequi exercitationem voluptatum. Delectus
+                        sed at nihil reiciendis corrupti eos aut numquam enim? Pariatur nam omnis, possimus adipisci perspiciatis cupiditate mollitia dicta atque assumenda.
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-Sent" role="tabpanel" aria-labelledby="pills-Sent-tab">
+                      <div class="container pl-4 pr-4">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa quo, inventore unde facilis consectetur et maxime veniam, nostrum illum totam nobis odit laudantium, obcaecati nihil sequi itaque necessitatibus
+                        corrupti adipisci repellat placeat est. Ipsam minima nesciunt, commodi temporibus repellat odio dolorum natus quis eum aut doloremque assumenda esse omnis eligendi! Eaque delectus quibusdam totam exercitationem
+                        repellendus, assumenda velit at corporis aliquid? Provident nihil fugiat reprehenderit nemo recusandae necessitatibus soluta porro quod, at, sint vitae! Perferendis, corporis consequuntur tempora facere inventore
+                        excepturi voluptates. Atque magni dolorum, assumenda provident ipsam iusto! Ex quia tempora obcaecati distinctio, aliquam minima ipsa, quibusdam ea consequuntur accusantium facere. Animi sit aut sed assumenda.
+                        Aperiam, sit adipisci dicta beatae ad sint voluptatum, ipsum cum vitae totam, inventore atque expedita illo explicabo blanditiis. Illum cum quae, numquam tempora earum quia debitis. Sunt doloribus nisi corporis iure
+                        ea cum unde itaque sint? Perferendis architecto voluptatem unde? Ex veritatis ratione suscipit quam? Tenetur modi saepe quos, distinctio sequi dolorum placeat aliquid maxime aliquam veniam amet corporis impedit,
+                        explicabo vitae assumenda. A unde inventore reiciendis maxime fugit aliquid numquam totam iusto modi laboriosam ab, deleniti ad eligendi distinctio. Inventore voluptate eum enim quo ex ut corporis harum sunt ducimus
+                        repellat reprehenderit dolores unde perspiciatis veniam tempore eaque tenetur natus, praesentium nam a veritatis doloribus, hic accusamus! Corporis alias eos voluptatibus temporibus laboriosam provident facere, dicta
+                        totam reiciendis id quisquam at perspiciatis delectus laudantium magnam doloribus in ab eveniet est quae obcaecati architecto, aliquid dolore. Sint iusto ab corporis ipsam soluta, itaque reiciendis nam, ducimus ut,
+                        voluptates eligendi et incidunt placeat adipisci optio. Nihil, reiciendis illo! Ab perferendis odit tempora alias assumenda cumque nihil adipisci voluptatem accusantium ullam! Magnam voluptatibus qui inventore atque,
+                        veritatis ut commodi illo libero accusamus quia doloribus itaque ad sapiente, natus possimus omnis velit iusto facere tempore est?
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-Completed" role="tabpanel" aria-labelledby="pills-Completed-tab">
+                      <div class="container pl-4 pr-4">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate rem obcaecati est? Earum laborum voluptatibus quis enim reprehenderit odio recusandae, et, eligendi molestias rerum, exercitationem blanditiis rem.
+                        Amet accusamus quaerat quisquam autem! Ex fuga impedit architecto qui neque numquam ipsum, rem dolores! Facere blanditiis maxime labore. Aliquid perspiciatis corporis necessitatibus, esse libero aliquam, quidem, quia
+                        et nihil repellat enim magnam fugiat cum maxime fuga distinctio labore laudantium inventore odit dolor? Expedita atque laborum sit? Expedita illum nesciunt dicta quidem praesentium voluptatem consectetur aperiam
+                        officiis, minus dolorem, odit hic doloremque, vitae minima? Impedit possimus laborum assumenda vitae, magnam dicta, cupiditate, temporibus amet tenetur omnis reprehenderit quaerat culpa architecto doloribus
+                        voluptatum id earum? Perferendis accusamus quae unde ad. Aperiam voluptatum, molestiae beatae expedita ex eius quas accusantium eligendi ipsam voluptas doloribus ut. Dolorem voluptates est quaerat architecto? Animi
+                        dolor voluptatem ratione. Voluptates commodi rerum nisi possimus voluptate vel. Dolores beatae saepe placeat ex quo nam. Esse officia corrupti inventore sit commodi iusto, similique quasi ut adipisci sunt itaque
+                        deleniti labore quia facere tempore nisi iure voluptatibus odit. Consectetur incidunt rerum amet doloremque molestias architecto aliquam similique sint debitis! Doloribus ipsa adipisci tempore, tempora dignissimos
+                        iure ipsum possimus ut eligendi voluptatibus reprehenderit voluptates veritatis, doloremque est id vitae molestiae optio sunt deleniti fugiat debitis reiciendis sed quod? Placeat officia commodi quia, aut distinctio
+                        nemo nesciunt quod officiis, harum quos asperiores animi dolor eos ea sint? Cumque fuga illum reiciendis pariatur eius totam nam, eos sit at quibusdam rerum, labore tenetur neque quos similique? Suscipit consequatur
+                        cum laborum provident sapiente accusantium maxime obcaecati fuga incidunt modi non doloremque rem sequi earum ut facere facilis molestias nam tempora, fugiat eius quam omnis numquam a. Molestiae ratione, laudantium
+                        aut vel inventore ab odit nulla harum voluptatibus aperiam, deserunt voluptates a sunt magni quaerat provident nisi dolore.
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-Order" role="tabpanel" aria-labelledby="pills-Order-tab">
+                      <div class="container pl-4 pr-4">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsa, illo quam soluta enim laudantium fuga repudiandae aliquam ut non quos, minima optio consequatur cum aliquid quia dolorum provident at architecto.
+                        Dicta consectetur ipsum voluptate quaerat non rem tenetur dolores temporibus eaque molestias corrupti iure fugit, nam voluptates nesciunt! Vero id deleniti repudiandae ipsa aliquid sint ullam ad quod, exercitationem
+                        illo atque fugit, ut non corporis alias. Corporis non sapiente atque quia dolores molestiae officia recusandae facilis odio ad, culpa facere quaerat ducimus. Facere deserunt nostrum dolore officia perspiciatis eaque
+                        velit quasi, tempora eum beatae sed excepturi recusandae accusamus veritatis sequi dolorem voluptatibus veniam repellat ut. Suscipit delectus neque temporibus velit, ad, natus nesciunt perspiciatis doloremque
+                        adipisci quo eveniet illo architecto corrupti omnis. Vel odio, aut quia ipsa pariatur modi ea nobis odit sunt quo blanditiis, optio earum, nostrum ex atque accusantium nisi voluptate. Eum possimus ipsa non ab quidem!
+                        Nisi ipsum dolorum autem nostrum incidunt quam voluptatibus consequuntur rerum. Iure sunt animi reprehenderit dolore quos rerum sapiente ipsam laborum modi, non sint neque itaque quasi culpa. Aspernatur fuga quasi,
+                        repudiandae eligendi dolor, vitae enim qui error voluptate in deserunt nostrum! Assumenda, culpa atque? Assumenda sequi incidunt doloribus repudiandae laborum, minima dolorem pariatur, id ullam adipisci
+                        necessitatibus alias delectus in veniam nemo illum, et magnam reiciendis aperiam reprehenderit ex sint? Libero iusto nobis quibusdam aperiam labore beatae voluptatem fugit ut iste laudantium magni eveniet hic eaque,
+                        aspernatur ullam adipisci veniam nesciunt laborum, nemo expedita atque quis aut vel! Sit asperiores quibusdam nostrum sint odit libero inventore doloribus minima. Facilis ad suscipit pariatur temporibus veritatis
+                        laboriosam saepe fugit id voluptas est, quidem quaerat sed perspiciatis nulla omnis impedit aliquid repellat non quibusdam deserunt! Voluptatum provident, dolorum totam iure sunt nam, laboriosam impedit reiciendis
+                        suscipit libero similique qui alias architecto quibusdam facilis?
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
